@@ -1,0 +1,38 @@
+.app {
+  padding: 50px 0px 0px 0px;
+}
+
+.form-control {
+  min-width: 600px;
+}
+
+.add-btn {
+  width: 250px;
+}
+
+.to-do-title {
+  padding: 20px;
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.to-do-list {
+  padding: 0;
+}
+
+.to-do-list li {
+  list-style-type: none;
+  padding: 5px 10px;
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.to-do-left-container {
+  align-items: center;
+}
