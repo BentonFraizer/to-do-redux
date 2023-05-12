@@ -1,5 +1,4 @@
 const tasksRouter = require('express').Router();
-const uuid = require('uuid');
 const { Task } = require('../../db/models');
 
 tasksRouter.get('/', async (req, res) => {
@@ -14,11 +13,8 @@ tasksRouter.get('/', async (req, res) => {
 });
 
 tasksRouter.post('/add', async (req, res) => {
-  const tasks = await Task.findAll();
-  const identificator = String(Number(tasks.length) + 1);
   try {
     const task = await Task.create({
-      id: identificator,
       userId: req.body.userId,
       title: req.body.title,
       completed: req.body.completed,
