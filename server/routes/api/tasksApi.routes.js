@@ -43,4 +43,26 @@ tasksRouter.delete('/:id', async (req, res) => {
   }
 });
 
+tasksRouter.put('/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const { userId, completed, title } = req.body;
+
+    const taskForUpdate = await Task.findOne({
+      where: { id },
+    });
+
+    taskForUpdate.userId = userId;
+    taskForUpdate.completed = completed;
+    taskForUpdate.title = title;
+    await taskForUpdate.save();
+
+    console.log('Задача успешно обновлена');
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.log('Упал с ошибкой');
+    res.status(404).json({ message: error });
+  }
+});
+
 module.exports = tasksRouter;

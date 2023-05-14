@@ -8,16 +8,22 @@ type TasItemProps = {
 
 function TaskItem({ task }: TasItemProps): JSX.Element {
   const dispatch = useDispatch();
-  const handleCheckboxClick = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleCheckboxClick = (evt: React.ChangeEvent<HTMLInputElement>, id: string): void => {
     const { checked } = evt.target;
-    const updatedTask = {
-      userId: task.userId,
-      id: task.id,
-      title: task.title,
-      completed: checked,
-    };
 
-    // dispatch({ type: 'TASK_CHANGE', payload: updatedTask });
+    fetch(`http://localhost:3000/api/tasks/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        userId: task.userId,
+        title: task.title,
+        completed: checked,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    dispatch({ type: 'TASK_UPDATE', payload: { completed: checked, id } });
   };
 
   const handleDelBtnClick = (id: string): void => {
@@ -32,7 +38,7 @@ function TaskItem({ task }: TasItemProps): JSX.Element {
   return (
     <li className="todo-item d-flex justify-content-between p-3" id={task.id}>
       <div className="to-do-left-container d-flex">
-        <input type="checkbox" name="check" className="checkbox me-3" defaultChecked={task.completed} onChange={(evt) => handleCheckboxClick(evt)} />
+        <input type="checkbox" name="check" className="checkbox me-3" defaultChecked={task.completed} onChange={(evt) => handleCheckboxClick(evt, task.id)} />
         {task.completed ? (
           <>
             <button type="button" className="btn btn-outline-success me-3">

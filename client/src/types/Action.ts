@@ -12,4 +12,8 @@ export type Action =
   | {
       type: 'TASK_DELETE';
       payload: string;
+    }
+  | {
+      type: 'TASK_UPDATE';
+      payload: { completed: boolean; id: string };
     };
