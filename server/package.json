@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "0.0.1",
-  "description": "quizzz Rolan the boss",
+  "description": "todos with Redux",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
