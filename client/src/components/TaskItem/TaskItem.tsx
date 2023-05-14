@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Task } from '../../types/Task/Task';
 
 type TasItemProps = {
@@ -6,6 +7,7 @@ type TasItemProps = {
 };
 
 function TaskItem({ task }: TasItemProps): JSX.Element {
+  const dispatch = useDispatch();
   const handleCheckboxClick = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const { checked } = evt.target;
     const updatedTask = {
@@ -19,7 +21,12 @@ function TaskItem({ task }: TasItemProps): JSX.Element {
   };
 
   const handleDelBtnClick = (id: string): void => {
-    // dispatch({ type: 'TASK_DELETE', payload: id });
+    fetch(`http://localhost:3000/api/tasks/${id}`, {
+      method: 'DELETE',
+    });
+
+    dispatch({ type: 'TASK_DELETE', payload: id });
+    console.log('Здесь');
   };
 
   return (

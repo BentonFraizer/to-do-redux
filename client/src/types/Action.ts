@@ -8,4 +8,8 @@ export type Action =
   | {
       type: 'TASK_ADD';
       payload: Task;
+    }
+  | {
+      type: 'TASK_DELETE';
+      payload: string;
     };

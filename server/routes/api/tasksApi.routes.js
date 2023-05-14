@@ -27,4 +27,20 @@ tasksRouter.post('/add', async (req, res) => {
   }
 });
 
+tasksRouter.delete('/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+
+    await Task.destroy({
+      where: { id },
+    });
+
+    console.log('Задача успешно удалена');
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.log('Упал с ошибкой');
+    res.status(404).json({ message: error });
+  }
+});
+
 module.exports = tasksRouter;
